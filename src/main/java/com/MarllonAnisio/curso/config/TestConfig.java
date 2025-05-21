@@ -3,16 +3,12 @@ package com.MarllonAnisio.curso.config;
 import java.time.Instant;
 import java.util.Arrays;
 
+import com.MarllonAnisio.curso.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.MarllonAnisio.curso.entities.Category;
-import com.MarllonAnisio.curso.entities.Order;
-import com.MarllonAnisio.curso.entities.OrderItem;
-import com.MarllonAnisio.curso.entities.Product;
-import com.MarllonAnisio.curso.entities.User;
 import com.MarllonAnisio.curso.entities.enums.OrderStatus;
 import com.MarllonAnisio.curso.repositories.CategoryRepository;
 import com.MarllonAnisio.curso.repositories.OrderItemRepository;
@@ -77,6 +73,10 @@ public class TestConfig implements CommandLineRunner{
 		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
-		
+
+
+		Payment pay1 = new Payment(null,Instant.parse("2019-06-20T21:53:07Z"),o1);
+		o1.setPayment(pay1);
+		orderRepository.save(o1);
 	}
 }
